@@ -15,3 +15,9 @@ $virtualNetwork = Set-AzVirtualNetwork -VirtualNetwork $virtualNetwork
 
 # Create a public IP address with Static allocation (Standard SKU requires Static)
 $publicIP = New-AzPublicIpAddress -Name 'MyPublicIP' -ResourceGroupName $resourceGroupName -Location $location -AllocationMethod Static -Sku Standard
+
+# Create a network interface and associate the public IP address
+$nic = New-AzNetworkInterface -Name 'MyNic' -ResourceGroupName $resourceGroupName -Location $location -SubnetId $virtualNetwork.Subnets[0].Id -PublicIpAddressId $publicIP.Id
+
+# Create a new network security group
+$nsg = New-AzNetworkSecurityGroup -ResourceGroupName $resourceGroupName -Location $location -Name 'MyNSG'
