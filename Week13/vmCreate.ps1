@@ -43,3 +43,10 @@ $securePassword = ConvertTo-SecureString 'Test1234$$$$' -AsPlainText -Force
 
 # VM credentials
 $credential = New-Object System.Management.Automation.PSCredential ('azureuser', $securePassword)
+
+# Configure the VM
+$vmConfig = New-AzVMConfig -VMName 'MyVM' -VMSize 'Standard_D2s_v3' |
+ Set-AzVMOperatingSystem -Windows -ComputerName 'MyVM' -Credential $credential -ProvisionVMAgent -EnableAutoUpdate |
+ Set-AzVMSourceImage -PublisherName 'MicrosoftWindowsServer' -Offer 'WindowsServer' -Skus '2016-Datacenter' -Version 'latest' |
+ Add-AzVMNetworkInterface -Id $nic.Id |
+ Set-AzVMOSDisk -CreateOption FromImage -Caching ReadWrite -StorageAccountType StandardSSD_LRS
