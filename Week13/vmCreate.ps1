@@ -28,4 +28,7 @@ $rdpRule = New-AzNetworkSecurityRuleConfig -Name 'Allow-RDP' `
     -SourcePortRange '*' -DestinationAddressPrefix '*' -DestinationPortRange 3389
 
 # Add the RDP rule to the NSG
-$nsg.SecurityRules.Add($rdpRule)    
+$nsg.SecurityRules.Add($rdpRule)
+
+# Update the NSG with the RDP rule
+Set-AzNetworkSecurityGroup -NetworkSecurityGroup $nsg
