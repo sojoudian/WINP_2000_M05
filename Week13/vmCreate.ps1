@@ -36,3 +36,7 @@ Set-AzNetworkSecurityGroup -NetworkSecurityGroup $nsg
 # Associate the NSG with the network interface
 $nic.NetworkSecurityGroup = $nsg
 Set-AzNetworkInterface -NetworkInterface $nic
+
+
+# Secure password for the VM
+$securePassword = ConvertTo-SecureString 'Test1234$$$$' -AsPlainText -Force
