@@ -21,3 +21,8 @@ $nic = New-AzNetworkInterface -Name 'MyNic' -ResourceGroupName $resourceGroupNam
 
 # Create a new network security group
 $nsg = New-AzNetworkSecurityGroup -ResourceGroupName $resourceGroupName -Location $location -Name 'MyNSG'
+
+# Create a new inbound security rule to allow RDP access (port 3389)
+$rdpRule = New-AzNetworkSecurityRuleConfig -Name 'Allow-RDP' `
+    -Access Allow -Protocol Tcp -Direction Inbound -Priority 1000 -SourceAddressPrefix '*' `
+    -SourcePortRange '*' -DestinationAddressPrefix '*' -DestinationPortRange 3389
