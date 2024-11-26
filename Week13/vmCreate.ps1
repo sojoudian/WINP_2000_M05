@@ -40,3 +40,6 @@ Set-AzNetworkInterface -NetworkInterface $nic
 
 # Secure password for the VM
 $securePassword = ConvertTo-SecureString 'Test1234$$$$' -AsPlainText -Force
+
+# VM credentials
+$credential = New-Object System.Management.Automation.PSCredential ('azureuser', $securePassword)
