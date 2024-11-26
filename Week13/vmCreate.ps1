@@ -50,3 +50,6 @@ $vmConfig = New-AzVMConfig -VMName 'MyVM' -VMSize 'Standard_D2s_v3' |
  Set-AzVMSourceImage -PublisherName 'MicrosoftWindowsServer' -Offer 'WindowsServer' -Skus '2016-Datacenter' -Version 'latest' |
  Add-AzVMNetworkInterface -Id $nic.Id |
  Set-AzVMOSDisk -CreateOption FromImage -Caching ReadWrite -StorageAccountType StandardSSD_LRS
+
+ # Create the VM
+New-AzVM -ResourceGroupName $resourceGroupName -Location $location -VM $vmConfig
