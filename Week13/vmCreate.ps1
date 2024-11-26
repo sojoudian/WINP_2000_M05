@@ -32,3 +32,7 @@ $nsg.SecurityRules.Add($rdpRule)
 
 # Update the NSG with the RDP rule
 Set-AzNetworkSecurityGroup -NetworkSecurityGroup $nsg
+
+# Associate the NSG with the network interface
+$nic.NetworkSecurityGroup = $nsg
+Set-AzNetworkInterface -NetworkInterface $nic
